@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import ParticlesBg from 'particles-bg'
+import { useState } from "react"
+import ParticlesBg from "particles-bg"
+import Navigation from "./components/Navigation"
+import ImageLinkForm from "./components/ImageLinkForm"
+import FaceRecognition from "./components/FaceRecognition"
+import Logo from "./components/Logo"
+import Rank from "./components/Rank"
 
-import './App.css'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState('')
+
+
+  const onInputChange = (e) => {
+    console.log(e.target.value);
+  }
+
+  const onSubmit = () => {
+    console.log('click');
+  }
 
   return (
     <div className="App">
-              <ParticlesBg type="circle" bg={true} />
-
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-    
+      <ParticlesBg className='particle' type="cobweb" bg={true} color="#777777" />
+      <Navigation />
+      <Logo />
+      <Rank />
+      <ImageLinkForm onInputChange={onInputChange} onSubmit={onSubmit} />
+      <FaceRecognition />            
     </div>
   )
 }

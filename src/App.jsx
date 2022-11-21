@@ -6,10 +6,12 @@ import FaceRecognition from "./components/FaceRecognition"
 import Logo from "./components/Logo"
 import Rank from "./components/Rank"
 import SignIn from "./components/SignIn"
+import Register from "./components/Register"
 
 function App() {
   const [input, setInput] = useState("")
   const [route, setRoute] = useState("signIn")
+  const [isSignedIn, setIsSignedIn] = useState(false)
 
   const onInputChange = (e) => {
     console.log(e.target.value)
@@ -19,6 +21,14 @@ function App() {
     console.log("click")
   }
 
+  const onRouteChange = (route) => {
+    if(route === 'signout'){
+      setIsSignedIn(false)
+    } else if(route === 'home'){
+      setIsSignedIn(true)
+    }
+    setRoute(route)
+  }
   return (
     <div className="App">
       <ParticlesBg
@@ -28,16 +38,18 @@ function App() {
         color="#777777"
       />
 
-      <Navigation />
-      {route === "signIn" ? (
-        <SignIn />
-      ) : (
+      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>
+      {route === "home" ? (
         <>
           <Logo />
           <Rank />
           <ImageLinkForm onInputChange={onInputChange} onSubmit={onSubmit} />
           <FaceRecognition />
         </>
+      ) : route === "signIn" ? (
+        <SignIn onRouteChange={onRouteChange} setSignIn={setIsSignedIn}/>
+      ) : (
+        <Register onRouteChange={onRouteChange}/>
       )}
     </div>
   )

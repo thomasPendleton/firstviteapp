@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ParticlesBg from "particles-bg"
 import Navigation from "./components/Navigation"
 import ImageLinkForm from "./components/ImageLinkForm"
@@ -13,6 +13,12 @@ function App() {
   const [route, setRoute] = useState("signIn")
   const [isSignedIn, setIsSignedIn] = useState(false)
 
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/")
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  // }, [])
+
   const onInputChange = (e) => {
     console.log(e.target.value)
   }
@@ -22,9 +28,9 @@ function App() {
   }
 
   const onRouteChange = (route) => {
-    if(route === 'signout'){
+    if (route === "signout") {
       setIsSignedIn(false)
-    } else if(route === 'home'){
+    } else if (route === "home") {
       setIsSignedIn(true)
     }
     setRoute(route)
@@ -38,7 +44,7 @@ function App() {
         color="#777777"
       />
 
-      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>
+      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} />
       {route === "home" ? (
         <>
           <Logo />
@@ -47,9 +53,9 @@ function App() {
           <FaceRecognition />
         </>
       ) : route === "signIn" ? (
-        <SignIn onRouteChange={onRouteChange} setSignIn={setIsSignedIn}/>
+        <SignIn onRouteChange={onRouteChange} setSignIn={setIsSignedIn} />
       ) : (
-        <Register onRouteChange={onRouteChange}/>
+        <Register onRouteChange={onRouteChange} />
       )}
     </div>
   )

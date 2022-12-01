@@ -1,6 +1,39 @@
-import React from "react"
+import React, { useState } from "react"
 
 const SignIn = ({ onRouteChange, setSignIn }) => {
+  const [signInEmail, setSignInEmail] = useState("")
+  const [signInPassword, setSignInPassword] = useState("")
+
+  const onEmailChange = (e) => {
+    setSignInEmail(e.target.value)
+  }
+
+  const onPasswordChange = (e) => {
+    setSignInPassword(e.target.value)
+  }
+
+  const onSubmit = () => {
+    console.log(signInEmail, signInPassword)
+    fetch("http://localhost:3000/signin", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === "success") {
+          onRouteChange("home")
+        }
+      })
+      setSignInPassword('')
+      setSignInEmail('')
+  }
+
   return (
     <article className="br3 shadow-5 ba dark-gray b--black-10 mv5 w-100 w-40-m w-40-l mw6 center tc">
       <main className="pa4 black-80">
@@ -16,6 +49,9 @@ const SignIn = ({ onRouteChange, setSignIn }) => {
                 type="email"
                 name="email-address"
                 id="email-address"
+                value={signInEmail}
+                onChange={onEmailChange}
+                required
               />
             </div>
             <div className="mv3">
@@ -27,19 +63,23 @@ const SignIn = ({ onRouteChange, setSignIn }) => {
                 type="password"
                 name="password"
                 id="password"
+                value={signInPassword}
+                onChange={onPasswordChange}
+                required
               />
             </div>
           </fieldset>
           <div className="">
             <input
               onClick={() => {
-                onRouteChange("home")
+                onSubmit()
               }}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
               value="Sign in"
             />
           </div>
+
           <div className="lh-copy mt3">
             <p
               href="#0"

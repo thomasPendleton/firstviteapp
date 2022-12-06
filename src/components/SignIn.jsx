@@ -25,9 +25,7 @@ const SignIn = ({ onRouteChange, setSignIn, loadUser }) => {
     })
       .then((response) => response.json())
       .then((user) => {
-        console.log(user)
         if (user.id) {
-          console.log('logging in');
           loadUser(user)
           onRouteChange("home")
         }

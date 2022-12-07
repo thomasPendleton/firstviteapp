@@ -20,7 +20,7 @@ function App() {
   const [input, setInput] = useState("")
   const [imageUrl, setImageUrl] = useState("")
   const [route, setRoute] = useState("signIn")
-  const [box, setBox] = useState({})
+  const [box, setBox] = useState([])
   const [isSignedIn, setIsSignedIn] = useState(false)
   const [user, setUser] = useState(initialState)
 
@@ -36,17 +36,34 @@ function App() {
   }
 
   const calculateFaceLocation = (data) => {
-    const clarifaiFace =
-      data.outputs[0].data.regions[0].region_info.bounding_box
-    const image = document.getElementById("inputimage")
-    const width = Number(image.width)
-    const height = Number(image.height)
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - clarifaiFace.right_col * width,
-      bottomRow: height - clarifaiFace.bottom_row * height,
-    }
+    const arrayOfRegions = data.outputs[0].data.regions
+    const boxes = arrayOfRegions.map((region) => {
+      const boundingBox = region.region_info.bounding_box
+      const image = document.getElementById("inputimage")
+      const width = Number(image.width)
+      const height = Number(image.height)
+      return {
+        leftCol: boundingBox.left_col * width,
+        topRow: boundingBox.top_row * height,
+        rightCol: width - boundingBox.right_col * width,
+        bottomRow: height - boundingBox.bottom_row * height,
+      }
+    })
+    return boxes
+
+    // Single box return
+    // const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box
+
+    // const image = document.getElementById("inputimage")
+    // const width = Number(image.width)
+    // const height = Number(image.height)
+  
+    // return {
+    //   leftCol: clarifaiFace.left_col * width,
+    //   topRow: clarifaiFace.top_row * height,
+    //   rightCol: width - clarifaiFace.right_col * width,
+    //   bottomRow: height - clarifaiFace.bottom_row * height,
+    // }
   }
 
   const displayFaceBox = (box) => {

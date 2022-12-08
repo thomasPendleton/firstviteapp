@@ -20,7 +20,7 @@ const Register = ({ onRouteChange, loadUser }) => {
     if (!email.includes("@")) return
     if (!name || !password || !email) return
 
-    fetch("http://localhost:3000/register", {
+    fetch("https://serene-lake-44298.herokuapp.com/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

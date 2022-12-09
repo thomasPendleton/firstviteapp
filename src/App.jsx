@@ -79,7 +79,7 @@ function App() {
 
     setImageUrl(input)
 
-    fetch("https://serene-lake-44298.herokuapp.com//imageurl", {
+    fetch("https://serene-lake-44298.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

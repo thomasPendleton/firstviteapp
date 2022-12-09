@@ -89,7 +89,7 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("https://serene-lake-44298.herokuapp.com//image", {
+          fetch("https://serene-lake-44298.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

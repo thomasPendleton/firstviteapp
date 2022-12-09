@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Logo from "./Logo"
 const Navigation = ({ onRouteChange, isSignedIn }) => {
   if (isSignedIn) {
     return (
@@ -8,7 +8,7 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
           onClick={() => {
             onRouteChange("signout")
           }}
-          className="f3 link dim black underline pa3 pointer"
+          className="f3 link dim black pa3 pointer mr3"
         >
           Sign out
         </p>
@@ -16,16 +16,18 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
     )
   } else {
     return (
-      <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+      <nav
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
         <p
           onClick={() => onRouteChange("signIn")}
-          className="f3 link dim black underline pa3 pointer"
+          className="f3 link dim black pa3 pointer"
         >
           Sign in
         </p>
         <p
           onClick={() => onRouteChange("register")}
-          className="f3 link dim black underline pa3 pointer"
+          className="f3 link dim black pa3 pointer mr3"
         >
           Register
         </p>
